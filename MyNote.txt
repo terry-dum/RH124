@@ -45,16 +45,27 @@ newgrp group01 -> temporarily change user's primary group
 
 /etc/group
 
+6)echo "message" >> filename -> append the message to this file
 
-/var/log/messages
-
-Password stored 
+7)Password stored 
 /etc/passwd - store info of local users, dictionary attack on encrypted pw
 /etc/shadow 
 
-/etc/group - info of local group
-
-chage - pw change policy
+chage -> pw change policy
 chage -m 0 -M 90 -W 7 -I 14 sysadmin
--I - after acc locked, if still inactive within 14days, no longer accessible
--W - warning 7 days b4 pw expire
+-I -> after acc locked, if still inactive within 14days, no longer accessible
+-W -> warning 7 days b4 pw expire
+chage -d 0 user01 -> force user to change pw on next logon
+
+/sbin/nologin
+usermod -s /sbin/nologin user01 -> cannot login, still can use pw to access other things
+
+date -d "+180 days" +%F
+Determine a date 180 days in the future
+
+chage -l -> see expiry date/pw expiry of a user
+
+
+/etc/login.def -> can set PASS_MAX_DAYS,MIN,WARN... for all user (wont affect current user, only user create after this will be affected)
+
+/var/log/messages
