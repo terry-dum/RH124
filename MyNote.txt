@@ -1,0 +1,60 @@
+id or id user01 - to show the currently logged in user,primary group(gid), groups
+
+ps - to show the current process in current shell
+ps -au - with user
+
+su - root/user
+
+
+
+
+
+1) Give user can use sudo
+/etc/sudoers - the file to see the %wheel which is admin
+usermod -aG wheel test_user - add user into wheel group (reboot to make it take effect)
+gpasswd -d test_user wheel - remove user from wheel group
+or
+create a file /etc/sudoers.d/user01
+add this inside the file "user01	ALL=(ALL)	ALL"
+
+Give the group of user can use sudo
+create a file /etc/sudoers.d/group01
+add this inside the file "%group01	ALL=(ALL)	ALL"
+note on the % means group
+
+2)userdel - remove username from /etc/passwd
+userdel -r - remove user from /etc/passwd and remove home directory
+
+3)useradd user01 - to create user
+passwd user01 - to change/give a pw to user01
+
+4)usermod -c - to update comment
+usermod -g change gid(primary group)
+usermod -aG ->add secondary group
+
+5)groupadd [groupname] - create new group
+groupmod - modify group info
+groupdel - delete group
+
+groupadd -g -> specifies a GID
+groupadd -r -> new system group
+groupmod -n -> change group name
+groupmod -g -> update group GID
+
+newgrp group01 -> temporarily change user's primary group
+
+/etc/group
+
+
+/var/log/messages
+
+Password stored 
+/etc/passwd - store info of local users, dictionary attack on encrypted pw
+/etc/shadow 
+
+/etc/group - info of local group
+
+chage - pw change policy
+chage -m 0 -M 90 -W 7 -I 14 sysadmin
+-I - after acc locked, if still inactive within 14days, no longer accessible
+-W - warning 7 days b4 pw expire
