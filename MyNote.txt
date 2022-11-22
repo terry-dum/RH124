@@ -60,6 +60,27 @@ chage -d 0 user01 -> force user to change pw on next logon
 /sbin/nologin
 usermod -s /sbin/nologin user01 -> cannot login, still can use pw to access other things
 
+8)ls -ld -> d is showing result of directory instead of the content
+
+chmod u/g/o/a	+/-/=	r/w/x
+chmod go-rw -> remove read write for group and others
+chmod -R g+rwx /home/user/myfolder -> recursively set permission for the file in this path
+chmod 777 -> r/w/x 4/2/1
+
+chown student app.conf -> change the user owner to student user for app.conf
+chown -R student /etc -> recursively change the owner to student for the directory itself, subdirectory, and the files inside
+
+chown :student app.conf -> (: colon) change the group owner to student group for app.conf
+chown user05:student05 app.conf -> change the (user owner:group owner) to (user05 user: student05 group) for app.conf
+
+Special permission
+chmod u+s->(suid 4) File; file executed as the user that own the file, not the user that run the file. Directory; no effect. If owner does not have execute permission, it will be replaced bt uppercase S in ls
+chmod g+s->(sgid 2) File; file executed as the group that own the file. Direcotry; file that created in this directory will set the group owner same as the directory. If group does not have execute permission, it will be replaced by uppercase S in ls
+chmod o+t->(sticky 1) File; no effect. Direcoty; Only file owner user, root can remove the files, they cannot remove or save files that owned by other users. even if 777 is set. Identify it by a "t" in ls. If other users do not have excute permission, it will be replaced by uppercase T
+
+chmod 2770 example -> setgid bit and +rw-x
+chmod 00770 example -> removing sgid and add rw-x. Note that need to add a preceding 0 when removing special permission
+
 date -d "+180 days" +%F
 Determine a date 180 days in the future
 
