@@ -90,3 +90,38 @@ chage -l -> see expiry date/pw expiry of a user
 /etc/login.def -> can set PASS_MAX_DAYS,MIN,WARN... for all user (wont affect current user, only user create after this will be affected)
 
 /var/log/messages
+
+9)[developer1@host ~]$ ssh hosta
+[developer1@hosta ~]
+ssh hosta -> login to hosta server using the same username as current local user
+
+[developer1@host ~]$ ssh developer2@hosta
+[developer2@hosta ~]$
+
+ssh developer2@hosta ls -> run ls command without accessing developer2 remote interactive shell
+
+'w' command displays a list of users that are currently logged in to the system
+w --from
+
+/etc/ssh/ssh_known_hosts
+~/.ssh/known_hosts
+clients' public key location
+-> if the key do not match when ssh, will prompt to ask whether want to continue
+-> after first time login, public key will save here ~/.ssh/known_hosts
+
+~/.ssh/config
+/etc/ssh/ssh_config 
+-> set StrictHostKeyChecking parameter to yes, SSH abort connection if public key do not match
+
+The server will store client public key to /etc/ssh directory
+ls /etc/ssh/*key.pub
+
+Passwordless login
+1) ssh-keygen -> generate private and public key which is saved in  ~/.ssh/id_rsa and ~/.ssh/id_rsa.pub
+or/ ssh-keygen -f path -> specify the files, key save in path and path.pub 
+2) ssh-copy-id [-i path.pub] user@remotehost -> copy the public key to remote system
+3) ssh -i privatekey_path user@remotehost -> specify the private key to access remote system. Without -i, it will have their default path
+
+ssh-add [path] -> add private key to ssh-agent, user wont be prompted when using ssh/scp to connect with their public key
+
+cat ~/.ssh/config
